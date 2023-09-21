@@ -31,5 +31,35 @@ class MyManager(BaseUserManager):
         user.save()
         return user
     
+class MyUser(AbstractBaseUser):
+    username = models.CharField("Nombre de usuario", max_length=50, unique=True)
+    email = models.EmailField("Correo electronico", max_length=254, unique=True)
+    name = models.CharField("Nombre de usuario", max_length=50, blank=True, null=True)
+    last_name = models.CharField("Apellidos", max_length=100, blank=True, null=True)
+
+    created_at = models.DateTimeField('Fecha de creacion', auto_now_add=True)
+
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
+    objects = MyManager()
 
 
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
+
+    def __str__(self):
+        return f"{self.username}"
+    
+    def has_perm(self, perm, obj = None):
+        return True
+    
+    def has_module_perms(self, app_label):
+        return True
+    
+    @property
+    def is_staff(self):
+        return self.is_admin
+    
