@@ -100,6 +100,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Modelos creados y sincronizados
+
+AUTH_USER_MODEL = 'core.MyUser'
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
