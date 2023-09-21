@@ -56,6 +56,7 @@ class Login(ObtainAuthToken):
                     return Response({'token': token.key,
                                      'user': user_serializer.data,
                                      'message': 'Inicio de sesion exitoso.'}, status=status.HTTP_201_CREATED)
+                    
                 
 
             else:
